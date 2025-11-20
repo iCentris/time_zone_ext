@@ -1,5 +1,7 @@
 require 'tzinfo'
-require "active_support/core_ext"
+require "active_support"
+require "active_support/time"
+require "active_support/core_ext/date_time"
 require "time_zone_ext/version"
 require "date"
 require "i18n"
