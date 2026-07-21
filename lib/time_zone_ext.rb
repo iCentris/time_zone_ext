@@ -29,6 +29,11 @@ module TimeZoneExt
       tmp_array = Array.new
       date_map = {}
       map = I18n.t(type, scope: "date", locale: locale)
+      # The CMS I18n backend can return a String here (a "translation missing"
+      # placeholder, or a stray CMS row created under a date.* key). These name
+      # lists are only usable as Arrays; anything else would crash the reduce,
+      # so skip the conversion and leave the date string untouched.
+      next s unless map.is_a?(Array)
       map.each { |r| tmp_array.push(r.to_s.gsub('.','')) }
       map = tmp_array.zip(replacements).to_h.tap { |h| h.delete("") }
       map.collect do |k , v|
